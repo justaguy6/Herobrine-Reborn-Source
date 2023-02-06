@@ -95,7 +95,7 @@ class Insults
 
         return '';
     }
-    #if desktop 
+    
     public static function fix(str:String):String {
         var a:Array<Array<String>> = [
             ["'", "`"],
@@ -107,5 +107,5 @@ class Insults
         }
         return str;
     }
-    #end
+    
 }
