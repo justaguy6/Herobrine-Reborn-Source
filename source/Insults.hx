@@ -16,7 +16,7 @@ class Insults
             "<Herobrine> what the fuck was thatr",
             "<Herobrine> plese touch some grass",
             "<Herobrine> lack of female companions?",
-            "<Herobrine> {USERNAME} im watching u",
+            "<Herobrine> Player im watching u",
             "<Herobrine> y r u rap battling me again??",
             "<Herobrine> Y U NO GOOD",
             "<Herobrine> youre life is meaningless,\nyou serve zero purpose",
@@ -95,7 +95,7 @@ class Insults
 
         return '';
     }
-
+    #if desktop 
     public static function fix(str:String):String {
         var a:Array<Array<String>> = [
             ["'", "`"],
@@ -107,4 +107,5 @@ class Insults
         }
         return str;
     }
+    #end
 }
