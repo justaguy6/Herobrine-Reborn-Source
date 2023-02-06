@@ -86,7 +86,7 @@ class Insults
             "<OldRoot> Turn back now.",
         ],
     ];
-
+    #if desktop 
     public static function getDeathQuote(char:String):String {
         if (deathQuotes.exists(char)) {
             var arr = deathQuotes.get(char);
@@ -107,5 +107,5 @@ class Insults
         }
         return str;
     }
-    
+    #end
 }
