@@ -1,5 +1,5 @@
 package window;
-
+#if windows 
 @:native("HWND__") extern class HWNDStruct
 {
 }
@@ -66,3 +66,4 @@ class Transparency
 		}
 	}
 }
+#end
