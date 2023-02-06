@@ -240,6 +240,10 @@ class FreeplayState extends MusicBeatState
 		daStatic.alpha = 0;
 		add(daStatic);
 		daStatic.animation.play('static');
+		
+		#if android
+                addVirtualPad(LEFT_FULL, A_B_C);
+                #end
 	}
 
 	override function closeSubState() {
