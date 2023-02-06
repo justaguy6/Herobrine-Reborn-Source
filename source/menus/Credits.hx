@@ -46,14 +46,19 @@ class Credits extends MusicBeatState {
         add(Position);
         FlxG.sound.playMusic(Paths.music('Rebirth'), 0);
         FlxG.sound.music.fadeIn(4, 0, 0.7);
+        
+        #if android
+                addVirtualPad(LEFT_RIGHT, B);
+                #end
+        
         super.create();
     }
 
     override function update(elapsed:Float)
     {
         super.update(elapsed);
-        var left = FlxG.keys.justPressed.LEFT;
-        var right = FlxG.keys.justPressed.RIGHT;
+        var left = controls.UI_LEFT_P;
+        var right = controls.UI_RIGHT_P;
 
         if (left)
         {
