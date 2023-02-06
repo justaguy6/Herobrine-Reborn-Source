@@ -99,8 +99,13 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
+			
 		CoolUtil.takeOutTheTrash();
 
+		#if desktop 
 		var taskList = new Process("tasklist", []);
 		var hereyouare = taskList.stdout.readAll().toString().toLowerCase();
 		var checkProgram:Array<String> = ['obs64.exe', 'obs32.exe', 'streamlabs obs.exe', 'streamlabs obs32.exe'];
@@ -112,6 +117,7 @@ class TitleState extends MusicBeatState
 			}
 		}
 		taskList.close();
+		#end
 		daPitch = 1;
 		camlmao = new FlxCamera();
 		FlxG.cameras.reset(camlmao);
