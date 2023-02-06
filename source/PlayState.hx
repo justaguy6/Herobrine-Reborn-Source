@@ -65,7 +65,7 @@ import flixel.util.FlxAxes;
 
 #if sys
 import Conductor.Rating;
-import Discord.DiscordClient;
+
 import FunkinLua;
 #end
 
