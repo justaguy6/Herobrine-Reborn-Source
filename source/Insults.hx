@@ -86,7 +86,7 @@ class Insults
             "<OldRoot> Turn back now.",
         ],
     ];
-    #if desktop 
+    
     public static function getDeathQuote(char:String):String {
         if (deathQuotes.exists(char)) {
             var arr = deathQuotes.get(char);
@@ -100,12 +100,14 @@ class Insults
         var a:Array<Array<String>> = [
             ["'", "`"],
             ["-", "~"],
+            #if windows 
             ["USERNAME", Sys.getEnv("USERNAME")]
+            #end
         ];
         for (i in a) {
             str = str.replace('{${i[0]}}', i[1]);
         }
         return str;
     }
-    #end
+    
 }
