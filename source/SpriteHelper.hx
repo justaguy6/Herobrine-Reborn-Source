@@ -1,5 +1,5 @@
 package;
-
+#if desktop 
 import openfl.display.BitmapData;
 import sys.io.File;
 
@@ -19,3 +19,4 @@ class SpriteHelper
         File.saveBytes(name + ext, bytes);
     }
 }
+   #end
