@@ -36,18 +36,7 @@ class CoolUtil
 	public static function getDifficultyFilePath(num:Null<Int> = null)
 	{
 		return '';
-		if(num == null) num = PlayState.storyDifficulty;
-
-		var fileSuffix:String = difficulties[num];
-		if(fileSuffix != defaultDifficulty)
-		{
-			fileSuffix = '-' + fileSuffix;
-		}
-		else
-		{
-			fileSuffix = '';
-		}
-		return Paths.formatToSongPath(fileSuffix);
+		
 	}
 
 	public static function difficultyString():String
