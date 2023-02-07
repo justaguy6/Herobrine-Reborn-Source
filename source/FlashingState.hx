@@ -34,6 +34,10 @@ class FlashingState extends MusicBeatState
 		warnText.setFormat(Paths.font("minecraft.ttf"), 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter();
 		add(warnText);
+		
+		#if android
+                addVirtualPad(NONE, A_B);
+                #end
 	}
 
 	override function update(elapsed:Float)
