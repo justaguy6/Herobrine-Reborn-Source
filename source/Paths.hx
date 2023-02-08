@@ -236,7 +236,7 @@ class Paths
 	{
 		#if MODS_ALLOWED
 		var file:String = modsVideo(key);
-		if(FileSystem.exists(file)) {
+		if(Assets.exists(file)) {
 			return file;
 		}
 		#end
@@ -285,25 +285,25 @@ class Paths
 	{
 		#if sys
 		#if MODS_ALLOWED
-		if (!ignoreMods && FileSystem.exists(modFolders(key)))
-			return File.getContent(modFolders(key));
+		if (!ignoreMods && Assets.exists(modFolders(key)))
+			return Assets.getText(modFolders(key));
 		#end
 
-		if (FileSystem.exists(getPreloadPath(key)))
-			return File.getContent(getPreloadPath(key));
+		if (Assets.exists(getPreloadPath(key)))
+			return Assets.getText(getPreloadPath(key));
 
 		if (currentLevel != null)
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
 				levelPath = getLibraryPathForce(key, currentLevel);
-				if (FileSystem.exists(levelPath))
-					return File.getContent(levelPath);
+				if (Assets.exists(levelPath))
+					return Assets.getText(levelPath);
 			}
 
 			levelPath = getLibraryPathForce(key, 'shared');
-			if (FileSystem.exists(levelPath))
-				return File.getContent(levelPath);
+			if (Assets.exists(levelPath))
+				return Assets.getText(levelPath);
 		}
 		#end
 		return Assets.getText(getPath(key, TEXT));
@@ -313,7 +313,7 @@ class Paths
 	{
 		#if MODS_ALLOWED
 		var file:String = modsFont(key);
-		if(FileSystem.exists(file)) {
+		if(Assets.exists(file)) {
 			return file;
 		}
 		#end
@@ -323,7 +323,7 @@ class Paths
 	inline static public function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String)
 	{
 		#if MODS_ALLOWED
-		if(FileSystem.exists(mods(currentModDirectory + '/' + key)) || FileSystem.exists(mods(key))) {
+		if(Assets.exists(mods(currentModDirectory + '/' + key)) || Assets.exists(mods(key))) {
 			return true;
 		}
 		#end
@@ -339,11 +339,11 @@ class Paths
 		#if MODS_ALLOWED
 		var imageLoaded:FlxGraphic = returnGraphic(key);
 		var xmlExists:Bool = false;
-		if(FileSystem.exists(modsXml(key))) {
+		if(Assets.exists(modsXml(key))) {
 			xmlExists = true;
 		}
 
-		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? File.getContent(modsXml(key)) : file('images/$key.xml', library)));
+		return FlxAtlasFrames.fromSparrow((imageLoaded != null ? imageLoaded : image(key, library)), (xmlExists ? Assets.getText(modsXml(key)) : file('images/$key.xml', library)));
 		#else
 		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
 		#end
@@ -355,11 +355,11 @@ class Paths
 		#if MODS_ALLOWED
 		var imageLoaded:FlxGraphic = returnGraphic(key);
 		var txtExists:Bool = false;
-		if(FileSystem.exists(modsTxt(key))) {
+		if(Assets.exists(modsTxt(key))) {
 			txtExists = true;
 		}
 
-		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? File.getContent(modsTxt(key)) : file('images/$key.txt', library)));
+		return FlxAtlasFrames.fromSpriteSheetPacker((imageLoaded != null ? imageLoaded : image(key, library)), (txtExists ? Assets.getText(modsTxt(key)) : file('images/$key.txt', library)));
 		#else
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
 		#end
@@ -378,7 +378,7 @@ class Paths
 	public static function returnGraphic(key:String, ?library:String) {
 		#if MODS_ALLOWED
 		var modKey:String = modsImages(key);
-		if(FileSystem.exists(modKey)) {
+		if(Assets.exists(modKey)) {
 			if(!currentTrackedAssets.exists(modKey)) {
 				var newBitmap:BitmapData = BitmapData.fromFile(modKey);
 				var newGraphic:FlxGraphic = FlxGraphic.fromBitmapData(newBitmap, false, modKey);
@@ -409,7 +409,7 @@ class Paths
 	public static function returnSound(path:String, key:String, ?library:String) {
 		#if MODS_ALLOWED
 		var file:String = modsSounds(path, key);
-		if(FileSystem.exists(file)) {
+		if(Assets.exists(file)) {
 			if(!currentTrackedSounds.exists(file)) {
 				currentTrackedSounds.set(file, Sound.fromFile(file));
 			}
@@ -486,14 +486,14 @@ class Paths
 	static public function modFolders(key:String) {
 		if(currentModDirectory != null && currentModDirectory.length > 0) {
 			var fileToCheck:String = mods(currentModDirectory + '/' + key);
-			if(FileSystem.exists(fileToCheck)) {
+			if(Assets.exists(fileToCheck)) {
 				return fileToCheck;
 			}
 		}
 
 		for(mod in getGlobalMods()){
 			var fileToCheck:String = mods(mod + '/' + key);
-			if(FileSystem.exists(fileToCheck))
+			if(Assets.exists(fileToCheck))
 				return fileToCheck;
 
 		}
@@ -540,10 +540,10 @@ class Paths
 	static public function getModDirectories():Array<String> {
 		var list:Array<String> = [];
 		var modsFolder:String = mods();
-		if(FileSystem.exists(modsFolder)) {
-			for (folder in FileSystem.readDirectory(modsFolder)) {
+		if(Assets.exists(modsFolder)) {
+			for (folder in HSys.readDirectory(modsFolder)) {
 				var path = haxe.io.Path.join([modsFolder, folder]);
-				if (sys.FileSystem.isDirectory(path) && !ignoreModFolders.contains(folder) && !list.contains(folder)) {
+				if (Assets.exists(path) && !ignoreModFolders.contains(folder) && !list.contains(folder)) {
 					list.push(folder);
 				}
 			}
