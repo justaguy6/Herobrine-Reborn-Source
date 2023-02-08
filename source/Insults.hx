@@ -16,7 +16,7 @@ class Insults
             "<Herobrine> what the fuck was thatr",
             "<Herobrine> plese touch some grass",
             "<Herobrine> lack of female companions?",
-            "<Herobrine> Player im watching u",
+            "<Herobrine> {USERNAME} im watching u",
             "<Herobrine> y r u rap battling me again??",
             "<Herobrine> Y U NO GOOD",
             "<Herobrine> youre life is meaningless,\nyou serve zero purpose",
@@ -100,9 +100,9 @@ class Insults
         var a:Array<Array<String>> = [
             ["'", "`"],
             ["-", "~"],
-            #if windows 
+            
             ["USERNAME", Sys.getEnv("USERNAME")]
-            #end
+            
         ];
         for (i in a) {
             str = str.replace('{${i[0]}}', i[1]);
